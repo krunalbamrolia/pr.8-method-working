@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Name Connect</title>
+    
+</head>
+
+<body>
+
+    <!-- css style -->
+    <style>
+        table {
+            padding-top: 100px;
+        }
+        table tr td,
+        th {
+            border: 2px solid #000;
+            padding: 10px;
+        }
+    </style>
+
+    <!-- form -->
+    <form name="myForm" onsubmit="return NameConnect()">
+        
+        <!-- first name -->
+        <label>Your Given Name</label>
+        <input type="text" name="fname" placeholder="First Name" >
+
+        <!-- last name -->
+         <label>Family Name</label>
+        <input type="text" name="lname" placeholder="Last Name" >
+
+        <!--number -->
+        <label>contact</label>
+        <input type="tel" name="contact" placeholder="98355*****">
+
+        <!-- email  -->
+        <label>Email</label>
+        <input type="email" name="email" placeholder="123@gmail.com">
+
+        <!-- button -->
+        <input type="submit" value="Submit">
+
+    </form>
+
+    <!-- data show in table format -->
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>contact</th>
+            <th>Email</th>
+        </tr>
+
+        <tr>
+            <td id="nm"></td>    
+            <td id="con"></td>
+            <td id="mail"></td>
+        </tr>
+    </table>
+
+</body>
+
+</html>
+
+<script>
+    // form submit
+    function NameConnect() {
+
+        const first_nm = document.forms["myForm"]["fname"].value
+        const last_nm = document.forms["myForm"]["lname"].value
+        const phone = document.forms["myForm"]["contact"].value
+        const gmail = document.forms["myForm"]["email"].value
+
+// validation using try and catch
+        try {
+            if(first_nm === "") throw "Enter your First Name" ; 
+            if(!isNaN(first_nm)) throw "Enter valid First Name";
+            if(first_nm.length < 3 || first_nm.length > 20) throw "Enter only 3 to 20 character First Name";
+
+            if(last_nm === "") throw "Enter your Last Name" ; 
+            if(!isNaN(last_nm)) throw "Enter valid Last Name";
+            if(last_nm.length < 3 || last_nm.length > 20) throw "Enter onlny 3 to 20 character Last Name";
+
+            if (isNaN(phone)) throw "Enter only yor number ....  valid number ";
+            if (phone.length < 10 || phone.length > 10) throw "Enter valide number (1 to 10 digit )";
+
+        } catch (error) {
+            alert(error);
+            console.log(error);
+            return false;
+        }
+        console.log(phone);
+
+        //opration
+        let mix = first_nm.concat(" ", last_nm).toUpperCase();
+
+        document.getElementById("nm").innerHTML = mix;
+        document.getElementById("con").innerHTML = phone;
+        document.getElementById("mail").innerHTML = gmail;
+        return false;
+    }
+
+</script>
